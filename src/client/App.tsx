@@ -1,9 +1,8 @@
 import * as React from 'react';
 import './app.css';
-import { NewsObject } from './interfaces/NewsObject'
 
 export default class App extends React.Component {
-    state = { searchObjects: [] };
+    state = {};
 
     componentDidMount() {
         fetch('/api/search')
@@ -12,11 +11,9 @@ export default class App extends React.Component {
     }
 
     render() {
-        const { searchObjects } = this.state;
-        console.log(searchObjects);
         return (
             <div>
-                {searchObjects.map(object => <p>{(object as NewsObject).name} </p>)}
+                cat
             </div>
         );
     }
