@@ -1,8 +1,19 @@
 import * as React from 'react';
 import './app.css';
+import { NewsObject } from './interfaces/NewsObject'
 
-export default class App extends React.Component {
-    state = {};
+// Great resource: https://github.com/Lemoncode/react-typescript-samples
+
+interface State {
+    searchObjects: NewsObject[];
+}
+interface Props { }
+
+export default class App extends React.Component<Props, State> {
+    constructor(props: Props) {
+        super(props);
+        this.state = { searchObjects: [] }
+    }
 
     componentDidMount() {
         fetch('/api/search')
@@ -13,7 +24,7 @@ export default class App extends React.Component {
     render() {
         return (
             <div>
-                cat
+                {this.state.searchObjects.map(searchObject => <p>{searchObject.name}</p>)}
             </div>
         );
     }
