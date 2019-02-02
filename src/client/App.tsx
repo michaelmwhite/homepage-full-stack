@@ -18,7 +18,7 @@ export default class App extends React.Component<Props, State> {
     componentDidMount() {
         fetch('/api/search')
             .then(response => response.json())
-            .then(data => this.setState({ searchObjects: data.searchData }));
+            .then(data => this.setState({ searchObjects: data.value }));
     }
 
     render() {
