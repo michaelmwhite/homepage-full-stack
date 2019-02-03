@@ -1,10 +1,11 @@
 const https = require('https');
+const keys = require('../keys');
 
 // Good resources: https://www.tomas-dvorak.cz/posts/nodejs-request-without-dependencies/
 // https://stackoverflow.com/questions/38533580/nodejs-how-to-promisify-http-request-reject-got-called-two-times
 // MS docs: https://docs.microsoft.com/en-us/rest/api/cognitiveservices/bing-web-api-v7-reference
 function bingVideoSearch(resolve, reject, search) {
-    let subscriptionKey = '3fd7d3b07f0d4193a3ee63287ce7669e';
+    let subscriptionKey = keys.azureKey;
     let host = 'api.cognitive.microsoft.com';
     let path = '/bing/v7.0/videos/search';
     let queryParams = 'count=10&freshness=day'
@@ -38,7 +39,7 @@ function bingVideoSearch(resolve, reject, search) {
 }
 
 function bingNewsSearch(resolve, reject, search) {
-    let subscriptionKey = '3fd7d3b07f0d4193a3ee63287ce7669e';
+    let subscriptionKey = keys.azureKey;
     let host = 'api.cognitive.microsoft.com';
     let path = '/bing/v7.0/news/search';
     let queryParams = 'freshness=day'
