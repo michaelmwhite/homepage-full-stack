@@ -1,30 +1,43 @@
 import * as React from 'react';
 import './app.css';
 import { NewsObject } from './interfaces/NewsObject'
+import { VideoObject } from './interfaces/VideoObject';
 
 // Great resource: https://github.com/Lemoncode/react-typescript-samples
 
 interface State {
-    searchObjects: NewsObject[];
+    newsObjects: NewsObject[];
+    videoObjects: VideoObject[];
 }
 interface Props { }
 
 export default class App extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props);
-        this.state = { searchObjects: [] }
+        this.state = {
+            newsObjects: [],
+            videoObjects: []
+        }
     }
 
     componentDidMount() {
-        fetch('/api/search')
+        fetch('/api/news/search')
             .then(response => response.json())
-            .then(data => this.setState({ searchObjects: data.value }));
+            .then(data => this.setState({ ...this.state, newsObjects: data.value }));
+        fetch('/api/video/search')
+            .then(response => response.json())
+            .then(data => this.setState({ ...this.state, videoObjects: data.value }));
     }
 
     render() {
         return (
             <div>
-                {this.state.searchObjects.map(searchObject => <p>{searchObject.name}</p>)}
+                <h1>News:</h1>
+                {this.state.newsObjects
+                    .map(newsObject => <p><a href={newsObject.url}>{newsObject.name}</a></p>)}
+                <h1>Videos:</h1>
+                {this.state.videoObjects
+                    .map(videoObjects => <p><a href={videoObjects.contentUrl}>{videoObjects.name}</a></p>)}
             </div>
         );
     }
