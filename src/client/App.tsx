@@ -1,5 +1,5 @@
 import * as React from 'react';
-import './app.css';
+import './app.scss';
 import { NewsObject } from './interfaces/NewsObject'
 import { VideoObject } from './interfaces/VideoObject';
 
