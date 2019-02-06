@@ -1,28 +1,61 @@
+// design inspirations: https://www.apple.com/
+
 $video-color: #44ce44;
-$news-color: #1fbbca;
+$link-color: #1fbbca;
 $highlight-color: #cabb1f;
+$background-gray: #f2f2f2;
+$med-text-gray: #555;
+$dark-text-grey: #111;
+
+body{
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background-color: $background-gray;
+}
 
 h1 {
   text-align: center;
 }
 
 a {
-  color: $highlight-color;
+  font-size: inherit;
+  color: inherit;
+  text-decoration: inherit;
+}
+
+.styled-link {
+  font-size: .75em;
+  color: $link-color;
+  text-decoration: underline;
 }
 
 @mixin centered-component {
+  background-color: white;
   margin: 5px auto;
   padding: 5px;
   width: 700px;
-  border: solid;
+  display: flex;
 }
 
 .video-component{
   @include centered-component;
-  border-color: $video-color;
+
+  .thumbnail-container{
+    display: flex;
+    align-items: center;
+    
+    img{
+      max-width: 180px;
+    }
+  }
+
+  .video-info{
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+  }
 }
 
 .news-component{
   @include centered-component;
-  border-color: $news-color;
+  flex-direction: column;
 }
