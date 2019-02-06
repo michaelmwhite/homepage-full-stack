@@ -2,6 +2,8 @@ import * as React from 'react';
 import './app.scss';
 import { NewsObject } from './interfaces/NewsObject'
 import { VideoObject } from './interfaces/VideoObject';
+import { NewsComponent } from './components/NewsComponent';
+import { VideoComponent } from './components/VideoComponent';
 
 // Great resource: https://github.com/Lemoncode/react-typescript-samples
 
@@ -34,10 +36,10 @@ export default class App extends React.Component<Props, State> {
             <div>
                 <h1>News:</h1>
                 {this.state.newsObjects
-                    .map(newsObject => <p><a href={newsObject.url}>{newsObject.name}</a></p>)}
+                    .map(newsObject => <NewsComponent {...newsObject} />)}
                 <h1>Videos:</h1>
                 {this.state.videoObjects
-                    .map(videoObjects => <p><a href={videoObjects.contentUrl}>{videoObjects.name}</a></p>)}
+                    .map(videoObject => <VideoComponent {...videoObject} />)}
             </div>
         );
     }

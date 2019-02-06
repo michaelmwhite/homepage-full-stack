@@ -1,8 +1,28 @@
+$video-color: #44ce44;
+$news-color: #1fbbca;
+$highlight-color: #cabb1f;
+
 h1 {
-  color: green;
+  text-align: center;
 }
 
-body {
-  text-align: center;
-  margin: auto;
+a {
+  color: $highlight-color;
+}
+
+@mixin centered-component {
+  margin: 5px auto;
+  padding: 5px;
+  width: 700px;
+  border: solid;
+}
+
+.video-component{
+  @include centered-component;
+  border-color: $video-color;
+}
+
+.news-component{
+  @include centered-component;
+  border-color: $news-color;
 }
