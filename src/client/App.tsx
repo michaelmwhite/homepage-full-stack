@@ -4,6 +4,7 @@ import { NewsObject } from './interfaces/NewsObject'
 import { VideoObject } from './interfaces/VideoObject';
 import { NewsComponent } from './components/NewsComponent';
 import { VideoComponent } from './components/VideoComponent';
+import { Header } from './components/Header';
 
 // Great resource: https://github.com/Lemoncode/react-typescript-samples
 
@@ -33,13 +34,16 @@ export default class App extends React.Component<Props, State> {
 
     render() {
         return (
-            <div>
-                <h1>News:</h1>
-                {this.state.newsObjects
-                    .map(newsObject => <NewsComponent {...newsObject} />)}
-                <h1>Videos:</h1>
-                {this.state.videoObjects
-                    .map(videoObject => <VideoComponent {...videoObject} />)}
+            <div id="top">
+                <Header />
+                <div className="content">
+                    <h1>News:</h1>
+                    {this.state.newsObjects
+                        .map(newsObject => <NewsComponent {...newsObject} />)}
+                    <h1>Videos:</h1>
+                    {this.state.videoObjects
+                        .map(videoObject => <VideoComponent {...videoObject} />)}
+                </div>
             </div>
         );
     }

@@ -6,10 +6,32 @@ $highlight-color: #cabb1f;
 $background-gray: #f2f2f2;
 $med-text-gray: #555;
 $dark-text-grey: #111;
+$header-background: rgba(45, 45, 45, .98);
+$header-text-color: #fff;
 
 body{
+  margin: 0;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   background-color: $background-gray;
+}
+
+nav{
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 44px;
+  font-size: 14px;
+  font-weight: 300;
+  background-color: $header-background;
+  color: $header-text-color;
+
+  ul{
+    list-style-type: none;
+  }
+
+  li{
+    display: inline-block;
+  }
 }
 
 h1 {
@@ -26,6 +48,10 @@ a {
   font-size: .75em;
   color: $link-color;
   text-decoration: underline;
+}
+
+.content{
+  padding-top: 44px;
 }
 
 @mixin centered-component {
