@@ -6,10 +6,10 @@ $highlight-color: #cabb1f;
 $background-gray: #f2f2f2;
 $med-text-gray: #555;
 $dark-text-grey: #111;
-$header-background: rgba(45, 45, 45, .98);
+$header-background: rgba(45, 45, 45, 0.98);
 $header-text-color: #fff;
 
-body{
+body {
   margin: 0;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   background-color: $background-gray;
@@ -25,76 +25,75 @@ a {
   text-decoration: inherit;
 }
 
-
-nav{
+nav {
   position: fixed;
-  top: 0;
   width: 100%;
   height: 44px;
+  top: 0;
   font-size: 14px;
   font-weight: 300;
   background-color: $header-background;
   color: $header-text-color;
 
-  ul{
+  ul {
     display: flex;
-    align-items: center;
     height: inherit;
     margin: 0;
+    align-items: center;
     list-style-type: none;
   }
 
-  a{
+  a {
     margin: 0;
   }
 
-  input{
+  input {
+    font-size: 17px;
     color: $header-text-color;
     background-color: transparent;
     border: none;
     outline: none;
-    font-size: 17px;
   }
 }
 
 .styled-link {
-  font-size: .75em;
+  font-size: 0.75em;
   color: $link-color;
   text-decoration: underline;
 }
 
-.content{
+.content {
   padding-top: 44px;
 }
 
 @mixin centered-component {
-  background-color: white;
+  display: flex;
+  width: 700px;
   margin: 5px auto;
   padding: 5px;
-  width: 700px;
-  display: flex;
+  background-color: white;
 }
 
-.video-component{
+.video-component {
   @include centered-component;
 
-  .thumbnail-container{
+  .thumbnail-container {
     display: flex;
     align-items: center;
-    
-    img{
+
+    img {
       max-width: 180px;
     }
   }
 
-  .video-info{
+  .video-info {
     display: flex;
-    flex-direction: column;
     padding: 5px;
+    flex-direction: column;
   }
 }
 
-.news-component{
+.news-component {
   @include centered-component;
   flex-direction: column;
 }
