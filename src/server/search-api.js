@@ -1,5 +1,5 @@
-const https = require('https');
 const keys = require('../keys');
+const cacheUtil = require('./cache-util');
 
 // Good resources: https://www.tomas-dvorak.cz/posts/nodejs-request-without-dependencies/
 // https://stackoverflow.com/questions/38533580/nodejs-how-to-promisify-http-request-reject-got-called-two-times
@@ -8,8 +8,7 @@ function bingVideoSearch(resolve, reject, search) {
     let subscriptionKey = keys.azureKey;
     let host = 'api.cognitive.microsoft.com';
     let path = '/bing/v7.0/videos/search';
-    let queryParams = 'count=10&freshness=day'
-
+    let queryParams = 'count=5&freshness=day'
     let requestParams = {
         method: 'GET',
         hostname: host,
@@ -18,32 +17,14 @@ function bingVideoSearch(resolve, reject, search) {
             'Ocp-Apim-Subscription-Key': subscriptionKey,
         }
     };
-
-    let req = https.request(requestParams, (response) => {
-        let body = '';
-        response.on('data', (d) => {
-            body += d;
-        });
-        response.on('end', () => {
-            body = JSON.stringify(JSON.parse(body), null, '  ');
-            resolve(body);
-        });
-        response.on('error', (e) => {
-            reject(e);
-        });
-    });
-    req.on('error', (e) => {
-        reject(e);
-    });
-    req.end();
+    cacheUtil.makeCachableRequest(resolve, reject, requestParams);
 }
 
 function bingNewsSearch(resolve, reject, search) {
     let subscriptionKey = keys.azureKey;
     let host = 'api.cognitive.microsoft.com';
     let path = '/bing/v7.0/news/search';
-    let queryParams = 'freshness=day'
-
+    let queryParams = 'count=5&freshness=day'
     let requestParams = {
         method: 'GET',
         hostname: host,
@@ -52,24 +33,7 @@ function bingNewsSearch(resolve, reject, search) {
             'Ocp-Apim-Subscription-Key': subscriptionKey,
         }
     };
-
-    let req = https.request(requestParams, (response) => {
-        let body = '';
-        response.on('data', (d) => {
-            body += d;
-        });
-        response.on('end', () => {
-            body = JSON.stringify(JSON.parse(body), null, '  ');
-            resolve(body);
-        });
-        response.on('error', (e) => {
-            reject(e);
-        });
-    });
-    req.on('error', (e) => {
-        reject(e);
-    });
-    req.end();
+    cacheUtil.makeCachableRequest(resolve, reject, requestParams);
 }
 
 module.exports = {
