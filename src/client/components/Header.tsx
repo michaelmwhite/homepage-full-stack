@@ -1,16 +1,40 @@
 import * as React from 'react';
 
-export class Header extends React.Component<any, any>{
+interface State {
+    inputValue: string;
+}
+interface Props { }
+
+export class Header extends React.Component<Props, State>{
+    constructor(props: Props) {
+        super(props);
+        this.state = { inputValue: '' };
+
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleChange(event: React.ChangeEvent<HTMLInputElement>) {
+        this.setState({ inputValue: event.target.value });
+    }
+
+    handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+        alert(this.state.inputValue);
+        this.setState({ inputValue: '' });
+        event.preventDefault();
+    }
+
     render() {
         return (
             <nav>
                 <ul>
                     <li><a href="#top">Newspaper 21</a></li>
                     <li>
-                        <form>
+                        <form onSubmit={this.handleSubmit}>
                             <input type="text" placeholder="Add a news topic"
                                 autoCorrect="off" autoComplete="off"
-                                autoCapitalize="off" spellCheck={false} />
+                                autoCapitalize="off" spellCheck={false}
+                                value={this.state.inputValue} onChange={this.handleChange} />
                         </form>
                     </li>
                 </ul>
