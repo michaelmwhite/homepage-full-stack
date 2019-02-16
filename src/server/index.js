@@ -4,8 +4,8 @@ const searchApi = require('./search-api');
 const app = express();
 
 app.use(express.static('dist'));
-app.get('/api/news/search', (req, res) => {
-  new Promise((resolve, reject) => searchApi.bingNewsSearch(resolve, reject, 'joe rogan'))
+app.get('/api/news/search/:topic', (req, res) => {
+  new Promise((resolve, reject) => searchApi.bingNewsSearch(resolve, reject, req.params.topic))
     .then((data) => {
       res.send(data);
     })
@@ -13,8 +13,8 @@ app.get('/api/news/search', (req, res) => {
       throw err;
     });
 });
-app.get('/api/video/search', (req, res) => {
-  new Promise((resolve, reject) => searchApi.bingVideoSearch(resolve, reject, 'joe rogan'))
+app.get('/api/video/search/:topic', (req, res) => {
+  new Promise((resolve, reject) => searchApi.bingVideoSearch(resolve, reject, req.params.topic))
     .then((data) => {
       res.send(data);
     })

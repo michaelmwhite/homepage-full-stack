@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { appendTopicCookie } from '../utils/cookie-util';
 
 interface State {
     inputValue: string;
@@ -19,7 +20,7 @@ export class Header extends React.Component<Props, State>{
     }
 
     handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-        alert(this.state.inputValue);
+        appendTopicCookie(this.state.inputValue);
         this.setState({ inputValue: '' });
         event.preventDefault();
     }

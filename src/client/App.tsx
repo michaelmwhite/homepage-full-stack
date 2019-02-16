@@ -5,6 +5,7 @@ import { VideoObject } from './interfaces/VideoObject';
 import { NewsComponent } from './components/NewsComponent';
 import { VideoComponent } from './components/VideoComponent';
 import { Header } from './components/Header';
+import { getTopics } from './utils/cookie-util';
 
 // Great resource: https://github.com/Lemoncode/react-typescript-samples
 
@@ -23,13 +24,17 @@ export default class App extends React.Component<Props, State> {
         }
     }
 
+    // todo: handle error if response is undefined
     componentDidMount() {
-        fetch('/api/news/search')
-            .then(response => response.json())
-            .then(data => this.setState({ ...this.state, newsObjects: data.value }));
-        fetch('/api/video/search')
-            .then(response => response.json())
-            .then(data => this.setState({ ...this.state, videoObjects: data.value }));
+        const topicsList = getTopics();
+        topicsList.forEach((topic: String) => {
+            fetch('/api/news/search/' + topic)
+                .then(response => response.json())
+                .then(data => this.setState({ ...this.state, newsObjects: data.value }));
+            fetch('/api/video/search/' + topic)
+                .then(response => response.json())
+                .then(data => this.setState({ ...this.state, videoObjects: data.value }));
+        });
     }
 
     render() {

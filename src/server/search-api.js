@@ -8,7 +8,7 @@ function bingVideoSearch(resolve, reject, search) {
     let subscriptionKey = keys.azureKey;
     let host = 'api.cognitive.microsoft.com';
     let path = '/bing/v7.0/videos/search';
-    let queryParams = 'count=5&freshness=day'
+    let queryParams = 'count=3&freshness=day'
     let requestParams = {
         method: 'GET',
         hostname: host,
@@ -24,7 +24,7 @@ function bingNewsSearch(resolve, reject, search) {
     let subscriptionKey = keys.azureKey;
     let host = 'api.cognitive.microsoft.com';
     let path = '/bing/v7.0/news/search';
-    let queryParams = 'count=5&freshness=day'
+    let queryParams = 'count=3&freshness=day'
     let requestParams = {
         method: 'GET',
         hostname: host,
