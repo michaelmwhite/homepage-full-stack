@@ -6,6 +6,7 @@ import { TopicArray } from './types/TopicArray';
 import { TopicObject } from './types/TopicObject';
 import { NewsComponent } from './components/NewsComponent';
 import { cloneObject } from './utils/helpers';
+import { VideoComponent } from './components/VideoComponent';
 
 // Great resource: https://github.com/Lemoncode/react-typescript-samples
 
@@ -22,7 +23,6 @@ export default class App extends React.Component<Props, State> {
         }
     }
 
-    // todo: handle error if response is undefined
     componentDidMount() {
         const topicsList = getTopics();
         topicsList.forEach((topic: string) => {
@@ -30,13 +30,23 @@ export default class App extends React.Component<Props, State> {
                 .then(response => response.json())
                 .then(data => {
                     let newTopics = cloneObject(this.state.topics)
-                    newTopics[topic] = new TopicObject();
+                    if (!newTopics[topic]) {
+                        newTopics[topic] = new TopicObject();
+                    }
                     newTopics[topic].newsObjects = data.value;
                     this.setState({ topics: newTopics });
                 }).catch(error => console.log(error));
-            /*fetch('/api/video/search/' + topic)
+            fetch('/api/video/search/' + topic)
                 .then(response => response.json())
-                .then(data => this.setState({ ...this.state, videoObjects: data.value }));*/
+                .then(data => {
+                    let newTopics = cloneObject(this.state.topics)
+                    if (!newTopics[topic]) {
+                        newTopics[topic] = new TopicObject();
+                    }
+                    newTopics[topic].videoObjects = data.value;
+                    this.setState({ topics: newTopics });
+                })
+                .catch(error => console.log(error));
         });
     }
 
@@ -53,6 +63,10 @@ export default class App extends React.Component<Props, State> {
                     {Object.keys(this.state.topics)
                         .map(topic => this.state.topics[topic].newsObjects
                             .map(newsObject => <NewsComponent {...newsObject} />))}
+                    <h1>Videos:</h1>
+                    {Object.keys(this.state.topics)
+                        .map(topic => this.state.topics[topic].videoObjects
+                            .map(videoObject => <VideoComponent {...videoObject} />))}
                 </div>
             </div>
         );
