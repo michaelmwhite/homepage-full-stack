@@ -1,4 +1,4 @@
-import { VideoObject } from "../interfaces/VideoObject";
+import { VideoObject } from "../types/VideoObject";
 import * as React from 'react';
 import * as url from 'url';
 
