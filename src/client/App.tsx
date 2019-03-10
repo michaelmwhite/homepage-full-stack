@@ -4,9 +4,8 @@ import { Header } from './components/Header';
 import { getTopics } from './utils/cookie-util';
 import { TopicArray } from './types/TopicArray';
 import { TopicObject } from './types/TopicObject';
-import { NewsComponent } from './components/NewsComponent';
 import { cloneObject } from './utils/helpers';
-import { VideoComponent } from './components/VideoComponent';
+import { TopicComponent } from './components/TopicComponent';
 
 // Great resource: https://github.com/Lemoncode/react-typescript-samples
 
@@ -31,7 +30,7 @@ export default class App extends React.Component<Props, State> {
                 .then(data => {
                     let newTopics = cloneObject(this.state.topics)
                     if (!newTopics[topic]) {
-                        newTopics[topic] = new TopicObject();
+                        newTopics[topic] = new TopicObject(topic);
                     }
                     newTopics[topic].newsObjects = data.value;
                     this.setState({ topics: newTopics });
@@ -41,7 +40,7 @@ export default class App extends React.Component<Props, State> {
                 .then(data => {
                     let newTopics = cloneObject(this.state.topics)
                     if (!newTopics[topic]) {
-                        newTopics[topic] = new TopicObject();
+                        newTopics[topic] = new TopicObject(topic);
                     }
                     newTopics[topic].videoObjects = data.value;
                     this.setState({ topics: newTopics });
@@ -59,14 +58,9 @@ export default class App extends React.Component<Props, State> {
             <div id="top">
                 <Header />
                 <div className="content">
-                    <h1>News:</h1>
-                    {Object.keys(this.state.topics)
-                        .map(topic => this.state.topics[topic].newsObjects
-                            .map(newsObject => <NewsComponent {...newsObject} />))}
-                    <h1>Videos:</h1>
-                    {Object.keys(this.state.topics)
-                        .map(topic => this.state.topics[topic].videoObjects
-                            .map(videoObject => <VideoComponent {...videoObject} />))}
+                    {Object.keys(this.state.topics).map(topic =>
+                        <TopicComponent {...this.state.topics[topic]} />
+                    )}
                 </div>
             </div>
         );
