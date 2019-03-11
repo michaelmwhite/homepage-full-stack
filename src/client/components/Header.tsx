@@ -4,7 +4,10 @@ import { appendTopicCookie } from '../utils/cookie-util';
 interface State {
     inputValue: string;
 }
-interface Props { }
+interface Props {
+    showOverlay: () => void;
+    hideOverlay: () => void;
+}
 
 export class Header extends React.Component<Props, State>{
     constructor(props: Props) {
@@ -27,7 +30,7 @@ export class Header extends React.Component<Props, State>{
 
     render() {
         return (
-            <nav>
+            <nav id="header">
                 <ul>
                     <li><a href="#top">Newspaper 21</a></li>
                     <li>
@@ -35,7 +38,8 @@ export class Header extends React.Component<Props, State>{
                             <input type="text" placeholder="Add a news topic"
                                 autoCorrect="off" autoComplete="off"
                                 autoCapitalize="off" spellCheck={false}
-                                value={this.state.inputValue} onChange={this.handleChange} />
+                                value={this.state.inputValue} onChange={this.handleChange}
+                                onFocus={this.props.showOverlay} onBlur={this.props.hideOverlay} />
                         </form>
                     </li>
                 </ul>

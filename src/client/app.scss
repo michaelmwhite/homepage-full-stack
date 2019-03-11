@@ -8,6 +8,7 @@ $med-text-gray: #555;
 $dark-text-grey: #111;
 $header-background: rgba(45, 45, 45, 0.98);
 $header-text-color: #fff;
+$overlay-color: rgba(0, 0, 0, 0.4);
 
 body {
   margin: 0;
@@ -64,6 +65,19 @@ nav {
   font-size: 0.75em;
   color: $link-color;
   text-decoration: underline;
+}
+
+#header {
+  z-index: 1;
+}
+
+#gray-overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: $overlay-color;
 }
 
 .content {

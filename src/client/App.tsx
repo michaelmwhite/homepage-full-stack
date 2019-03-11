@@ -10,7 +10,8 @@ import { TopicComponent } from './components/TopicComponent';
 // Great resource: https://github.com/Lemoncode/react-typescript-samples
 
 interface State {
-    topics: TopicArray
+    topics: TopicArray;
+    showOverlay: boolean;
 }
 interface Props { }
 
@@ -18,7 +19,8 @@ export default class App extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props);
         this.state = {
-            topics: {}
+            topics: {},
+            showOverlay: false
         }
     }
 
@@ -33,7 +35,7 @@ export default class App extends React.Component<Props, State> {
                         newTopics[topic] = new TopicObject(topic);
                     }
                     newTopics[topic].newsObjects = data.value;
-                    this.setState({ topics: newTopics });
+                    this.setState({ ...this.state, topics: newTopics });
                 }).catch(error => console.log(error));
             fetch('/api/video/search/' + topic)
                 .then(response => response.json())
@@ -43,7 +45,7 @@ export default class App extends React.Component<Props, State> {
                         newTopics[topic] = new TopicObject(topic);
                     }
                     newTopics[topic].videoObjects = data.value;
-                    this.setState({ topics: newTopics });
+                    this.setState({ ...this.state, topics: newTopics });
                 })
                 .catch(error => console.log(error));
         });
@@ -56,7 +58,11 @@ export default class App extends React.Component<Props, State> {
     render() {
         return (
             <div id="top">
-                <Header />
+                <Header
+                    showOverlay={() => this.setState({ ...this.state, showOverlay: true })}
+                    hideOverlay={() => this.setState({ ...this.state, showOverlay: false })}
+                />
+                <span id={this.state.showOverlay ? "gray-overlay" : null} />
                 <div className="content">
                     {Object.keys(this.state.topics).map(topic =>
                         <TopicComponent {...this.state.topics[topic]} />
