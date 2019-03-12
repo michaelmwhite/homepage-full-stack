@@ -51,18 +51,31 @@ nav {
 
   aside {
     position: absolute;
-    top: 11px;
+    top: 0;
     width: 67%;
     left: 17%;
     font-size: 17px;
 
     input {
       width: 100%;
+      height: 44px;
       color: $header-text-color;
       background-color: transparent;
       border: none;
       outline: none;
       font-size: inherit;
+    }
+
+    .hidden-dropdown {
+      display: none;
+    }
+
+    .search-dropdown {
+      position: absolute;
+      top: 44px;
+      width: 100%;
+      color: $dark-text-grey;
+      background-color: white;
     }
   }
 }
