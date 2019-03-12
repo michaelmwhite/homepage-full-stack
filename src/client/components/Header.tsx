@@ -28,21 +28,23 @@ export class Header extends React.Component<Props, State>{
         event.preventDefault();
     }
 
+    // Note: keeping ul-li for now since that's how apple has it, but they handle reduced screen
+    // size differently with a reactive menu, so I may need to diverge from theirs in the future
     render() {
         return (
             <nav id="header">
                 <ul>
                     <li><a href="#top">Newspaper 21</a></li>
-                    <li>
-                        <form onSubmit={this.handleSubmit}>
-                            <input type="text" placeholder="Add a news topic"
-                                autoCorrect="off" autoComplete="off"
-                                autoCapitalize="off" spellCheck={false}
-                                value={this.state.inputValue} onChange={this.handleChange}
-                                onFocus={this.props.showOverlay} onBlur={this.props.hideOverlay} />
-                        </form>
-                    </li>
                 </ul>
+                <aside>
+                    <form onSubmit={this.handleSubmit}>
+                        <input type="text" placeholder="Add a news topic"
+                            autoCorrect="off" autoComplete="off"
+                            autoCapitalize="off" spellCheck={false}
+                            value={this.state.inputValue} onChange={this.handleChange}
+                            onFocus={this.props.showOverlay} onBlur={this.props.hideOverlay} />
+                    </form>
+                </aside>
             </nav>
         );
     }
