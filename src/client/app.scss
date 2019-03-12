@@ -2,10 +2,12 @@
 
 $video-color: #44ce44;
 $link-color: #1fbbca;
+$dark-link-color: #0070c9;
 $highlight-color: #cabb1f;
 $background-gray: #f2f2f2;
+$light-text-gray: #888;
 $med-text-gray: #555;
-$dark-text-grey: #111;
+$dark-text-gray: #111;
 $header-background: rgba(45, 45, 45, 0.98);
 $header-text-color: #fff;
 $overlay-color: rgba(0, 0, 0, 0.4);
@@ -36,17 +38,9 @@ nav {
   background-color: $header-background;
   color: $header-text-color;
 
-  ul {
-    display: flex;
-    height: inherit;
-    margin: 0;
-    padding: 0 22px;
-    align-items: center;
-    list-style-type: none;
-  }
-
   a {
-    margin: 0;
+    display: inline-block;
+    padding: 15px 22px;
   }
 
   aside {
@@ -66,6 +60,30 @@ nav {
       font-size: inherit;
     }
 
+    h3 {
+      color: $light-text-gray;
+      font-size: 11px;
+    }
+
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style-type: none;
+    }
+
+    li {
+      margin: 6px 0 6px 0;
+      padding: 6px 24px;
+      font-size: 15px;
+      font-weight: 300;
+      color: $med-text-gray;
+    }
+
+    li:hover {
+      background-color: $background-gray;
+      color: $dark-link-color;
+    }
+
     .hidden-dropdown {
       display: none;
     }
@@ -74,7 +92,8 @@ nav {
       position: absolute;
       top: 44px;
       width: 100%;
-      color: $dark-text-grey;
+      padding: 24px 44px 18px 44px;
+      color: $dark-text-gray;
       background-color: white;
     }
   }

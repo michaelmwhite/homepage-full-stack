@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { appendTopicCookie } from '../utils/cookie-util';
+import { appendTopicCookie, getTopics } from '../utils/cookie-util';
 
 interface State {
     inputValue: string;
@@ -41,14 +41,10 @@ export class Header extends React.Component<Props, State>{
         this.setState({ ...this.state, showDropdown: false });
     }
 
-    // Note: keeping ul-li for now since that's how apple has it, but they handle reduced screen
-    // size differently with a reactive menu, so I may need to diverge from theirs in the future
     render() {
         return (
             <nav id="header">
-                <ul>
-                    <li><a href="#top">Newspaper 21</a></li>
-                </ul>
+                <a href="#top">Newspaper 2000</a>
                 <aside>
                     <form onSubmit={this.handleSubmit}>
                         <input type="text" placeholder="Add a news topic"
@@ -58,7 +54,10 @@ export class Header extends React.Component<Props, State>{
                             onFocus={this.searchFocused} onBlur={this.searchBlurred} />
                     </form>
                     <section className={this.state.showDropdown ? "search-dropdown" : "hidden-dropdown"}>
-                        TODO: Results...
+                        <h3>TOPICS</h3>
+                        <ul>
+                            {getTopics().map((topic: string) => <li>{topic}</li>)}
+                        </ul>
                     </section>
                 </aside>
             </nav>
