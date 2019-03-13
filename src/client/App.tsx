@@ -10,8 +10,8 @@ import { TopicComponent } from './components/TopicComponent';
 // Great resource: https://github.com/Lemoncode/react-typescript-samples
 
 interface State {
+    topicsList: string[];
     topics: TopicArray;
-    showOverlay: boolean;
 }
 interface Props { }
 
@@ -19,14 +19,15 @@ export default class App extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props);
         this.state = {
-            topics: {},
-            showOverlay: false
+            topicsList: getTopics(),
+            topics: {}
         }
+        this.updateTopicsList = this.updateTopicsList.bind(this);
     }
 
     componentDidMount() {
-        const topicsList = getTopics();
-        topicsList.forEach((topic: string) => {
+        console.log(this.state.topics);
+        this.state.topicsList.forEach((topic: string) => {
             fetch('/api/news/search/' + topic)
                 .then(response => response.json())
                 .then(data => {
@@ -51,6 +52,12 @@ export default class App extends React.Component<Props, State> {
         });
     }
 
+    updateTopicsList() {
+        console.log("UPDATE TOPICS LIST");
+        console.log(getTopics());
+        this.setState({ ...this.state, topicsList: getTopics() });
+    }
+
     // NOTE: elements must be returned in {..} statements, foreach returns undefined - map 
     // actually returns things so it should be used instead
     // () => x means that x will be returned, so adding more curly brackets can be redundant and 
@@ -58,11 +65,8 @@ export default class App extends React.Component<Props, State> {
     render() {
         return (
             <div id="top">
-                <Header
-                    showOverlay={() => this.setState({ ...this.state, showOverlay: true })}
-                    hideOverlay={() => this.setState({ ...this.state, showOverlay: false })}
-                />
-                <span id={this.state.showOverlay ? "gray-overlay" : null} />
+                <Header topicsList={this.state.topicsList}
+                    updateTopicsList={this.updateTopicsList} />
                 <div className="content">
                     {Object.keys(this.state.topics).map(topic =>
                         <TopicComponent {...this.state.topics[topic]} />
