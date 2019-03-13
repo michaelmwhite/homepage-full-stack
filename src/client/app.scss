@@ -72,8 +72,10 @@ nav {
     }
 
     li {
+      display: flex;
       margin: 6px 0 6px 0;
       padding: 6px 24px;
+      justify-content: space-between;
       font-size: 15px;
       font-weight: 300;
       color: $med-text-gray;
@@ -82,6 +84,11 @@ nav {
     li:hover {
       background-color: $background-gray;
       color: $dark-link-color;
+    }
+
+    a {
+      padding: 0;
+      text-decoration: underline;
     }
 
     .hidden-dropdown {

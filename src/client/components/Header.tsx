@@ -56,7 +56,9 @@ export class Header extends React.Component<Props, State>{
                     <section className={this.state.showDropdown ? "search-dropdown" : "hidden-dropdown"}>
                         <h3>TOPICS</h3>
                         <ul>
-                            {getTopics().map((topic: string) => <li>{topic}</li>)}
+                            {getTopics().map((topic: string) =>
+                                <li>{topic}<a href="#">Remove</a></li>
+                            )}
                         </ul>
                     </section>
                 </aside>
