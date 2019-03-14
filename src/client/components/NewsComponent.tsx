@@ -1,4 +1,4 @@
-import { NewsObject } from "../interfaces/NewsObject";
+import { NewsObject } from "../types/NewsObject";
 import * as React from 'react';
 import * as url from 'url';
 

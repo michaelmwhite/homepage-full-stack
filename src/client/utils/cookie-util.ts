@@ -7,5 +7,15 @@ export function getTopics() {
 export function appendTopicCookie(topic: string) {
     const topicsList = getTopics().concat(topic);
     Cookies.set('topics', topicsList);
-    alert(Cookies.getJSON('topics'));
+}
+
+export function removeTopic(removeTopic: string) {
+    const oldTopics = getTopics();
+    let newTopics: string[] = [];
+    oldTopics.forEach((topic: string) => {
+        if (topic !== removeTopic) {
+            newTopics.push(topic);
+        }
+    });
+    Cookies.set('topics', newTopics);
 }

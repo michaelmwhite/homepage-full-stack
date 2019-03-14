@@ -2,12 +2,15 @@
 
 $video-color: #44ce44;
 $link-color: #1fbbca;
+$dark-link-color: #0070c9;
 $highlight-color: #cabb1f;
 $background-gray: #f2f2f2;
+$light-text-gray: #888;
 $med-text-gray: #555;
-$dark-text-grey: #111;
+$dark-text-gray: #111;
 $header-background: rgba(45, 45, 45, 0.98);
 $header-text-color: #fff;
+$overlay-color: rgba(0, 0, 0, 0.4);
 
 body {
   margin: 0;
@@ -27,36 +30,80 @@ a {
 
 nav {
   position: fixed;
+  top: 0;
   width: 100%;
   height: 44px;
-  top: 0;
   font-size: 14px;
   font-weight: 300;
   background-color: $header-background;
   color: $header-text-color;
 
-  ul {
-    display: flex;
-    height: inherit;
-    margin: 0 120px;
-    padding: 0 22px;
-    align-items: center;
-    list-style-type: none;
-  }
-
   a {
-    margin: 0;
+    display: inline-block;
+    padding: 15px 22px;
   }
 
-  input {
-    position: relative;
-    width: 700px;
-    left: 44px;
+  aside {
+    position: absolute;
+    top: 0;
+    width: 67%;
+    left: 17%;
     font-size: 17px;
-    color: $header-text-color;
-    background-color: transparent;
-    border: none;
-    outline: none;
+
+    input {
+      width: 100%;
+      height: 44px;
+      color: $header-text-color;
+      background-color: transparent;
+      border: none;
+      outline: none;
+      font-size: inherit;
+    }
+
+    h3 {
+      color: $light-text-gray;
+      font-size: 11px;
+    }
+
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style-type: none;
+    }
+
+    li {
+      display: flex;
+      margin: 6px 0 6px 0;
+      padding: 6px 24px;
+      justify-content: space-between;
+      font-size: 15px;
+      font-weight: 300;
+      color: $med-text-gray;
+    }
+
+    li:hover {
+      background-color: $background-gray;
+      color: $dark-link-color;
+    }
+
+    a {
+      padding: 0;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    .hidden-dropdown {
+      display: none;
+    }
+
+    .search-dropdown {
+      position: absolute;
+      top: 44px;
+      width: 100%;
+      padding: 24px 44px 18px 44px;
+      color: $dark-text-gray;
+      background-color: white;
+    }
   }
 }
 
@@ -64,6 +111,19 @@ nav {
   font-size: 0.75em;
   color: $link-color;
   text-decoration: underline;
+}
+
+#header {
+  z-index: 1;
+}
+
+#gray-overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: $overlay-color;
 }
 
 .content {
