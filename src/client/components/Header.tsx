@@ -26,7 +26,8 @@ export class Header extends React.Component<Props, State>{
     }
 
     handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-        appendTopicCookie(this.state.inputValue, this.props.updateTopicsList);
+        appendTopicCookie(this.state.inputValue);
+        this.props.updateTopicsList();
         this.setState({ ...this.state, inputValue: '' });
         event.preventDefault();
     }
@@ -57,7 +58,10 @@ export class Header extends React.Component<Props, State>{
                             <ul>
                                 {this.props.topicsList.map((topic: string) =>
                                     <li>{topic}
-                                        <a onClick={() => removeTopic(topic, this.props.updateTopicsList)}
+                                        <a onClick={() => {
+                                            removeTopic(topic);
+                                            this.props.updateTopicsList();
+                                        }}
                                         >Remove</a>
                                     </li>
                                 )}

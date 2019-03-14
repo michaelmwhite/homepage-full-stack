@@ -26,7 +26,6 @@ export default class App extends React.Component<Props, State> {
     }
 
     componentDidMount() {
-        console.log(this.state.topics);
         this.state.topicsList.forEach((topic: string) => {
             fetch('/api/news/search/' + topic)
                 .then(response => response.json())
@@ -53,8 +52,6 @@ export default class App extends React.Component<Props, State> {
     }
 
     updateTopicsList() {
-        console.log("UPDATE TOPICS LIST");
-        console.log(getTopics());
         this.setState({ ...this.state, topicsList: getTopics() });
     }
 
