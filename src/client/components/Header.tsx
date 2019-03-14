@@ -44,7 +44,7 @@ export class Header extends React.Component<Props, State>{
         return (
             <div>
                 <nav id="header">
-                    <a href="#top">Newspaper 2000</a>
+                    <a href="#top">TMAC Newz</a>
                     <aside>
                         <form onSubmit={this.handleSubmit}>
                             <input type="text" placeholder="Add a news topic"
