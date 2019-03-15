@@ -3,7 +3,7 @@ const searchApi = require('./search-api');
 
 const app = express();
 
-app.use(express.static('dist'));
+app.use(express.static('build'));
 app.get('/api/news/search/:topic', (req, res) => {
   new Promise((resolve, reject) => searchApi.bingNewsSearch(resolve, reject, req.params.topic))
     .then((data) => {
